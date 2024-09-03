@@ -1,0 +1,35 @@
+class Solution {
+public:
+    int countDays(int days, vector<vector<int>>& meetings) {
+        vector<pair<int, int>> events;
+
+        for (const auto& meeting : meetings) {
+            events.emplace_back(meeting[0], 1);
+            events.emplace_back(meeting[1] + 1, -1); 
+        }
+
+        sort(events.begin(), events.end());
+
+        int ongoingMeetings = 0;
+        int count = 0;
+        int prevDay = 0;
+
+        for (const auto& event : events) {
+            int day = event.first;
+            int type = event.second;
+
+            if (prevDay < day && ongoingMeetings == 0) {
+                count += day - prevDay;
+            }
+
+            ongoingMeetings += type;
+            prevDay = day;
+        }
+
+        if (prevDay <= days && ongoingMeetings == 0) {
+            count += days - prevDay + 1;
+        }
+
+        return count-1;
+    }
+};

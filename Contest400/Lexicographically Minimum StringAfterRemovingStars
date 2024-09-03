@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int minimumChairs(string s) {
+        int p=0;
+        int num = s.size();
+        int mn=1e9;
+        for(int i=0;i<num;i++)
+        {
+            int count;
+            if(s[i]=='E'){
+                count = p - 1;
+            }
+            else{
+                count=p+1;
+            }
+           
+            p=count;
+            mn=min(mn,count);
+            
+            
+        }
+        return abs(mn);
+    }
+};

@@ -1,0 +1,20 @@
+class Solution {
+public:
+    bool isArraySpecial(vector<int>& nums) {
+        int prev = 3;
+        int cur = 3;
+        for(int i = 0; i < nums.size(); i++) {
+            if(nums.at(i) % 2 == 0) {
+                prev = cur;
+                cur = 1;
+            } else {
+                prev = cur;
+                cur = 0;
+            }
+            if(prev == cur) {
+                return false;
+            }
+        }
+        return true;
+    }
+};
